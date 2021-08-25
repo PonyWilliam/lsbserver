@@ -16,6 +16,53 @@ router.post('/change',async(ctx,next)=>{
     id = param.id
     await sql.query('UPDATE orders SET is_payed=1 WHERE id = ' + id)
 })
+async function init(){
+    //user_id`, `device_id`, `area_id`, `time_start`,`time_end`,`now_time`,`price`
+    //questions` (`content`, `submit_time`, `user_name`, `user_id`,`phone`
+    let sql1 = `drop table if exists orders`
+    let sql5 = `drop table if exists questions`
+    let sql6 = `drop table if exists areas`
+    let sql2 = `CREATE TABLE orders
+    (
+    id int AUTO_INCREMENT,
+    user_id int,
+    device_id int,
+    area_id int,
+    time_start varchar(255),
+    time_end varchar(255),
+    now_time varchar(255),
+    price varchar(15),
+    PRIMARY KEY (id)
+    )`
+    let sql3 = `CREATE TABLE questions
+    (
+    id int AUTO_INCREMENT,
+    content varchar(255),
+    submit_time varchar(255),
+    area_id int,
+    user_name varchar(255),
+    user_id int,
+    PRIMARY KEY (id)
+    )`
+    let sql4 = `CREATE TABLE areas
+    (
+    id int AUTO_INCREMENT,
+    names varchar(255),
+    cover varchar(255),
+    lat varchar(255),
+    lng varchar(255),
+    PRIMARY KEY (id)
+    )`
+    await sql.query(sql1)
+    await sql.query(sql5)
+    await sql.query(sql6)
+    await sql.query(sql3)
+    await sql.query(sql4)
+    return await sql.query(sql2)
+}
+router.post('/init',async(ctx,next)=>{
+    ctx.body = await init()
+})
 router.post('/order', async(ctx, next) => {
     param = ctx.request.body
     method = param.method

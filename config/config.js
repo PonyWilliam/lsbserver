@@ -1,8 +1,8 @@
 var config = {
-    host: '39.107.65.116',
-    port: 3306,
-    database: 'lsb',
-    user: 'lsb',
-    password: 'lsb666'
+    host: 'sh-cynosdbmysql-grp-2o1mkprk.sql.tencentcdb.com',
+    port: 21270,
+    database: 'gostudy',
+    user: 'root',
+    password: 'xiaowei123!'
 }
 module.exports = config
